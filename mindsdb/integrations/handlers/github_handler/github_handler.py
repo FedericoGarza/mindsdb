@@ -9,12 +9,11 @@ from mindsdb.integrations.libs.response import (
     HandlerStatusResponse as StatusResponse,
 )
 
-from mindsdb.utilities.log import get_log
+from mindsdb.utilities import log
 from mindsdb_sql import parse_sql
 
 
-logger = get_log("integrations.github_handler")
-
+logger = log.getLogger(__name__)
 
 class GithubHandler(APIHandler):
     """The GitHub handler implementation"""
