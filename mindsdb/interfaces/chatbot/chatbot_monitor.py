@@ -1,4 +1,3 @@
-import logging
 import time
 
 from mindsdb.interfaces.chatbot.chatbot_thread import ChatBotThread
@@ -7,8 +6,7 @@ from mindsdb.interfaces.storage import db
 from mindsdb.utilities import log
 from mindsdb.utilities.config import Config
 
-logger = {}
-
+logger = log.getLogger(__name__)
 
 class ChatBotMonitor:
     """Starts and stops chatbots based on their configuration in the database."""
@@ -83,9 +81,6 @@ class ChatBotMonitor:
 
 def start(verbose=False):
     """Creates a new ChatBotMonitor based on MindsDB config and starts monitoring chatbots."""
-    log.configure_logging()  # Because this is the entrypoint for a process, we need to config logging
-    global logger
-    logger = logging.getLogger(__name__)
     logger.info("ChatBot API is starting..")
     is_cloud = Config().get("cloud", False)
     if is_cloud is True:

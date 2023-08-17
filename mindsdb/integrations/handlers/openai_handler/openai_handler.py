@@ -23,6 +23,7 @@ from mindsdb.integrations.handlers.openai_handler.helpers import retry_with_expo
 
 CHAT_MODELS = ('gpt-3.5-turbo', 'gpt-3.5-turbo-0301', 'gpt-4', 'gpt-4-0314', 'gpt-4-32k', 'gpt-4-32k-0314')
 
+logger = log.getLogger(__name__)
 
 class OpenAIHandler(BaseMLEngine):
     name = 'openai'
@@ -295,7 +296,7 @@ class OpenAIHandler(BaseMLEngine):
             params2 = params.copy()
             params2.pop('api_key', None)
             params2.pop('user', None)
-            log.logger.debug(f'>>>openai call: {params2}:\n{response}')
+            logger.debug(f'>>>openai call: {params2}:\n{response}')
 
         def _submit_normal_completion(kwargs, prompts, api_args):
             def _tidy(comp):

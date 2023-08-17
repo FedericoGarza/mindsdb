@@ -4,6 +4,7 @@ from mindsdb.utilities import log
 from mindsdb.interfaces.chatbot.realtime_chatbot_task import RealtimeChatBotTask
 from mindsdb.interfaces.chatbot.realtime_chat_handler_factory import RealtimeChatHandlerFactory
 
+logger = log.getLogger(__name__)
 
 class RealtimeChatBotThread(threading.Thread):
     """A thread for a realtime chatbot to operate."""
@@ -23,7 +24,7 @@ class RealtimeChatBotThread(threading.Thread):
         try:
             self._chatbot_task.run()
         except Exception as e:
-            log.logger.error(e)
+            logger.error(e)
 
     def stop(self):
         """Stops running the chatbot"""

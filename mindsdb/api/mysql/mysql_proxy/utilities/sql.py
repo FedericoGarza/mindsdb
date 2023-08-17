@@ -14,6 +14,7 @@ from mindsdb_sql.parser.ast import (
 from mindsdb.utilities import log
 from mindsdb.utilities.json_encoder import CustomJSONEncoder
 
+logger = log.getLogger(__name__)
 
 def query_df(df, query, session=None):
     """ Perform simple query ('select' from one table, without subqueries and joins) on DataFrame.
@@ -84,7 +85,7 @@ def query_df(df, query, session=None):
     try:
         query_str = render.get_string(query_ast, with_failback=False)
     except Exception as e:
-        log.logger.error(
+        logger.error(
             f"Exception during query casting to 'postgres' dialect. Query: {str(query)}. Error: {e}"
         )
         query_str = render.get_string(query_ast, with_failback=True)

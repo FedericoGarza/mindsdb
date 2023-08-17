@@ -7,6 +7,7 @@ from mindsdb.utilities import log
 from mindsdb.utilities.context import context as ctx
 from mindsdb.interfaces.chatbot.chatbot_task import ChatBotTask
 
+logger = log.getLogger(__name__)
 
 class ChatBotThread(threading.Thread):
     """A thread for polling style chatbots to operate."""
@@ -42,11 +43,11 @@ class ChatBotThread(threading.Thread):
             try:
                 task.run()
             except Exception as e:
-                log.logger.error(e)
+                logger.error(e)
 
             if self._to_stop:
                 return
-            log.logger.debug('running ' + self.name)
+            logger.debug('running ' + self.name)
             time.sleep(7)
 
     def stop(self):
