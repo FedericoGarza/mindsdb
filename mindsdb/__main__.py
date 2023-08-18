@@ -215,7 +215,6 @@ if __name__ == "__main__":
     logger.info(f"Storage path: {config['paths']['root']}")
     logger.debug(f"User config: {user_config}")
 
-
     # @TODO Backwards compatibility for tests, remove later
     for (
         handler_name,
