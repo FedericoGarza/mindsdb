@@ -8,6 +8,7 @@ from mindsdb.utilities.config import Config
 
 logger = log.getLogger(__name__)
 
+
 class ChatBotMonitor:
     """Starts and stops chatbots based on their configuration in the database."""
 

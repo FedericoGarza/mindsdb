@@ -1,7 +1,9 @@
 import threading
 import time
 
-from mindsdb.api.mysql.mysql_proxy.controllers.session_controller import SessionController
+from mindsdb.api.mysql.mysql_proxy.controllers.session_controller import (
+    SessionController,
+)
 from mindsdb.interfaces.storage import db
 from mindsdb.utilities import log
 from mindsdb.utilities.context import context as ctx
@@ -9,8 +11,10 @@ from mindsdb.interfaces.chatbot.chatbot_task import ChatBotTask
 
 logger = log.getLogger(__name__)
 
+
 class ChatBotThread(threading.Thread):
     """A thread for polling style chatbots to operate."""
+
     def __init__(self, bot_record):
         threading.Thread.__init__(self)
         self.bot_record = bot_record
@@ -33,11 +37,13 @@ class ChatBotThread(threading.Thread):
 
         database_name = db.Integration.query.get(self.bot_record.database_id).name
 
-        task = ChatBotTask(session,
-                           database=database_name,
-                           project_name=project_name,
-                           model_name=model_name,
-                           params=self.bot_record.params)
+        task = ChatBotTask(
+            session,
+            database=database_name,
+            project_name=project_name,
+            model_name=model_name,
+            params=self.bot_record.params,
+        )
 
         while True:
             try:
@@ -47,7 +53,7 @@ class ChatBotThread(threading.Thread):
 
             if self._to_stop:
                 return
-            logger.debug('running ' + self.name)
+            logger.debug("running " + self.name)
             time.sleep(7)
 
     def stop(self):
